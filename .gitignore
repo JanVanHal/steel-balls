@@ -1,0 +1,5 @@
+.lock
+.tmp-*
+__pycache__/
+*.pyc
+dashboard.png

@@ -1,0 +1,15 @@
+{
+  "name": "Steel Balls",
+  "mode": "paper-trading simulation (no real money)",
+  "currency": "USD",
+  "start_cash": 500.0,
+  "cash": 500.0,
+  "positions": [],
+  "spy_baseline": null,
+  "start_date_et": null,
+  "start_date_bkk": null,
+  "planned_start": "2026-10-05 09:30 ET / 2026-10-05 20:30 ICT (US open)",
+  "created_bkk": "2026-10-03 10:30 ICT",
+  "last_update_bkk": null,
+  "last_prices": {}
+}

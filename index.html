@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Steel Balls · paper portfolio vs SPY</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#f7f7f5;--card:#fff;--ink:#1d1f21;--muted:#6b6f76;--line:#e4e4e0;--accent:#2f5d50;--spy:#9a9ca1;--pos:#2f6b45;--neg:#a23b3b}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 Inter,"DM Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:32px 24px 48px}
+  header{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:24px}
+  h1{font-size:20px;font-weight:600;margin:0;letter-spacing:-.01em}
+  h2{font-size:13px;font-weight:600;margin:0 0 12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+  .sub{color:var(--muted);font-size:13px}
+  .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:2px 10px;font-size:12px;color:var(--muted);background:var(--card)}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+  .k{color:var(--muted);font-size:12px;margin-bottom:4px}
+  .v{font-size:24px;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .d{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;margin-top:2px}
+  .pos{color:var(--pos)} .neg{color:var(--neg)}
+  section{margin-bottom:16px}
+  table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+  th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-weight:500;color:var(--muted);font-size:12px}
+  td.n,th.n{text-align:right;white-space:nowrap}
+  tr:last-child td{border-bottom:0}
+  .reason{color:var(--ink);max-width:520px}
+  .src a{color:var(--accent);font-size:12px;margin-right:8px;text-decoration:none;border-bottom:1px solid var(--line)}
+  .empty{color:var(--muted);padding:18px 4px;text-align:center}
+  .legend{display:flex;gap:16px;font-size:12px;color:var(--muted);margin-bottom:8px}
+  .legend i{display:inline-block;width:14px;height:2px;vertical-align:middle;margin-right:6px}
+  svg text{font:11px Inter,system-ui,sans-serif;fill:var(--muted)}
+  footer{color:var(--muted);font-size:12px;margin-top:24px;border-top:1px solid var(--line);padding-top:12px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  @media(max-width:760px){.grid{grid-template-columns:repeat(2,1fr)}.reason{max-width:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div><h1>Steel Balls</h1><div class="sub">Virtual 500 USD paper portfolio vs a 500 USD SPY baseline</div></div>
+    <div id="status" class="pill"></div>
+  </header>
+  <div class="grid" id="kpis"></div>
+  <section class="card">
+    <h2>Value vs SPY baseline</h2>
+    <div class="legend"><span><i style="background:var(--accent)"></i>Steel Balls</span><span><i style="background:var(--spy)"></i>SPY baseline</span></div>
+    <div id="chart"></div>
+  </section>
+  <section class="card"><h2>Holdings</h2><div id="holdings"></div></section>
+  <section class="card"><h2>Trade log</h2><div id="trades"></div></section>
+  <footer><span>Simulation with virtual money, not financial advice.</span><span id="updated"></span></footer>
+</div>
+<script id="data" type="application/json">{"portfolio": {"name": "Steel Balls", "mode": "paper-trading simulation (no real money)", "currency": "USD", "start_cash": 500.0, "cash": 500.0, "positions": [], "spy_baseline": null, "start_date_et": null, "start_date_bkk": null, "planned_start": "2026-10-05 09:30 ET / 2026-10-05 20:30 ICT (US open)", "created_bkk": "2026-10-03 10:30 ICT", "last_update_bkk": null, "last_prices": {}}, "trades": [], "history": [], "built_bkk": "2026-10-03 10:25:04 ICT"}</script>
+<script>
+(function(){
+  const D = JSON.parse(document.getElementById('data').textContent);
+  const P = D.portfolio, T = D.trades, H = D.history;
+  const $ = id => document.getElementById(id);
+  const r2 = x => (Math.round(x*100)/100) || 0;
+  const usd = x => (x=r2(x), (x<0?'-':'')) + '$' + Math.abs(x).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+  const pct = x => (x=r2(x), (x>0?'+':'') + x.toFixed(2) + '%');
+  const sgn = x => x>=0.005?'pos':(x<=-0.005?'neg':'');
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const px = t => (P.last_prices[t]||{}).price;
+
+  const posVal = P.positions.reduce((s,p)=>s + p.shares*(px(p.ticker)||p.avg_cost),0);
+  const value = P.cash + posVal;
+  const gain = r2(value - P.start_cash), gainPct = gain/P.start_cash*100;
+  const B = P.spy_baseline;
+  let spyVal=null, spyPct=null;
+  if (B){ spyVal = r2(B.shares*(px('SPY')||B.price) + (B.usd - B.shares*B.price)); spyPct=(spyVal/B.usd-1)*100; }
+  const diffPP = B ? r2(gainPct - spyPct) : 0;
+  const prelaunch = !B;
+
+  $('status').textContent = prelaunch ? 'Pre-launch · opening trades Mon 5 Oct at US open (20:30 Bangkok)'
+                                      : 'Live since ' + B.datetime_et.slice(0,10) + ' ET';
+  const kpi = (k,v,d,cls) => `<div class="card"><div class="k">${k}</div><div class="v ${cls||''}">${v}</div><div class="d">${d||'&nbsp;'}</div></div>`;
+  $('kpis').innerHTML = [
+    kpi('Portfolio value', usd(value), prelaunch ? 'All cash' : 'Cash ' + usd(P.cash)),
+    kpi('Gain / loss', `${gain>=0?'+':''}${usd(gain)}`, pct(gainPct), sgn(gain)),
+    kpi('SPY baseline', prelaunch ? usd(P.start_cash) : usd(spyVal), prelaunch ? 'Bought at the same moment as the opening trades' : pct(spyPct) + ' · ' + B.shares.toFixed(4) + ' SPY @ ' + usd(B.price)),
+    kpi('Difference vs SPY', prelaunch ? '0.00 pp' : (diffPP>0?'+':'') + diffPP.toFixed(2) + ' pp', prelaunch ? 'Starts at the open' : usd(value - spyVal), prelaunch?'':sgn(diffPP))
+  ].join('');
+
+  // chart
+  (function(){
+    const pts = [];
+    if (B) pts.push({d:'start', a:P.start_cash, b:B.usd});
+    H.forEach(r => pts.push({d:r.date_et, a:+r.portfolio_value, b:+r.spy_value}));
+    if (pts.length < 2){
+      $('chart').innerHTML = `<div class="empty" style="height:220px;display:flex;align-items:center;justify-content:center;border:1px dashed var(--line);border-radius:8px">${prelaunch?'Chart starts after the first close following the opening trades (Mon 5 Oct, US Eastern).':'Chart fills in after the next daily close.'}</div>`;
+      return;
+    }
+    const W=1000,Hh=260,L=56,R=16,Tp=12,Bt=28;
+    const vals = pts.flatMap(p=>[p.a,p.b]); let lo=Math.min(...vals), hi=Math.max(...vals);
+    const pad=Math.max((hi-lo)*0.12, 2); lo-=pad; hi+=pad;
+    const x=i=> L + i*(W-L-R)/(pts.length-1), y=v=> Tp + (hi-v)*(Hh-Tp-Bt)/(hi-lo);
+    const path = k => pts.map((p,i)=>(i?'L':'M')+x(i).toFixed(1)+' '+y(p[k]).toFixed(1)).join(' ');
+    let g='';
+    for(let i=0;i<=4;i++){const v=lo+(hi-lo)*i/4; g+=`<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" stroke="#ecece8"/><text x="${L-8}" y="${y(v)+4}" text-anchor="end">$${v.toFixed(hi-lo<20?1:0)}</text>`;}
+    const step=Math.max(1,Math.ceil(pts.length/8));
+    pts.forEach((p,i)=>{ if(i%step===0||i===pts.length-1) g+=`<text x="${x(i)}" y="${Hh-8}" text-anchor="${i===0?'start':(i===pts.length-1?'end':'middle')}">${esc(p.d==='start'?B.datetime_et.slice(5,10)+' open':p.d.slice(5,10))}</text>`; });
+    $('chart').innerHTML = `<svg viewBox="0 0 ${W} ${Hh}" width="100%" role="img" aria-label="Portfolio vs SPY">${g}
+      <path d="${path('b')}" fill="none" stroke="var(--spy)" stroke-width="1.6" stroke-dasharray="4 3"/>
+      <path d="${path('a')}" fill="none" stroke="var(--accent)" stroke-width="2"/></svg>`;
+  })();
+
+  // holdings
+  let rows = P.positions.map(p=>{
+    const last = px(p.ticker)||p.avg_cost, mv=p.shares*last, pl=mv-p.cost_basis;
+    return `<tr><td><b>${esc(p.ticker)}</b></td><td class="n">${p.shares.toFixed(4)}</td><td class="n">${usd(p.avg_cost)}</td><td class="n">${usd(last)}</td><td class="n">${usd(mv)}</td><td class="n ${sgn(pl)}">${pl>=0?'+':''}${usd(pl)} (${pct(pl/p.cost_basis*100)})</td><td class="n">${(mv/value*100).toFixed(1)}%</td></tr>`;
+  }).join('');
+  rows += `<tr><td><b>Cash</b></td><td class="n">–</td><td class="n">–</td><td class="n">–</td><td class="n">${usd(P.cash)}</td><td class="n">–</td><td class="n">${(P.cash/value*100).toFixed(1)}%</td></tr>`;
+  $('holdings').innerHTML = `<table><thead><tr><th>Ticker</th><th class="n">Shares</th><th class="n">Avg cost</th><th class="n">Last</th><th class="n">Value</th><th class="n">P/L</th><th class="n">Weight</th></tr></thead><tbody>${rows}</tbody></table>`;
+
+  // trades
+  if (!T.length){
+    $('trades').innerHTML = `<div class="empty">No trades yet. Opening trades and the 500 USD SPY baseline get filled at the first real prices of Mon 5 Oct 2026 (09:30 ET / 20:30 Bangkok).</div>`;
+  } else {
+    $('trades').innerHTML = `<table><thead><tr><th>#</th><th>When (Bangkok / ET)</th><th>Action</th><th class="n">Shares</th><th class="n">Price</th><th class="n">Total</th><th>Reason &amp; sources</th></tr></thead><tbody>${
+      T.slice().reverse().map(t=>`<tr><td>${esc(t.trade_id)}</td><td style="white-space:nowrap">${esc(t.datetime_bkk)}<br><span class="sub">${esc(t.datetime_et)}</span></td><td><b>${esc(t.action)}</b> ${esc(t.ticker)}</td><td class="n">${(+t.shares).toFixed(4)}</td><td class="n">${usd(+t.price)}</td><td class="n">${usd(+t.total)}</td><td class="reason">${esc(t.reason)}<div class="src">${
+        (t.sources||'').split(/\s+/).filter(Boolean).map(u=>{let h=u;try{h=new URL(u).hostname.replace(/^www\./,'')}catch(e){} return `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(h)}</a>`}).join('')}</div></td></tr>`).join('')
+    }</tbody></table>`;
+  }
+  $('updated').textContent = 'Data updated ' + (P.last_update_bkk || D.built_bkk) + ' · built ' + D.built_bkk;
+})();
+</script>
+</body>
+</html>
