@@ -3,13 +3,88 @@
   "mode": "paper-trading simulation (no real money)",
   "currency": "USD",
   "start_cash": 500.0,
-  "cash": 500.0,
-  "positions": [],
-  "spy_baseline": null,
-  "start_date_et": null,
-  "start_date_bkk": null,
+  "cash": 25.0,
+  "positions": [
+    {
+      "ticker": "SMH",
+      "shares": 0.159126,
+      "avg_cost": 628.43,
+      "cost_basis": 100.0,
+      "opened_et": "2026-10-05 09:46:06 ET"
+    },
+    {
+      "ticker": "XLE",
+      "shares": 1.609528,
+      "avg_cost": 62.13,
+      "cost_basis": 100.0,
+      "opened_et": "2026-10-05 09:46:07 ET"
+    },
+    {
+      "ticker": "XLF",
+      "shares": 1.875117,
+      "avg_cost": 53.33,
+      "cost_basis": 100.0,
+      "opened_et": "2026-10-05 09:46:04 ET"
+    },
+    {
+      "ticker": "RSP",
+      "shares": 0.478434,
+      "avg_cost": 209.015,
+      "cost_basis": 100.0,
+      "opened_et": "2026-10-05 09:46:07 ET"
+    },
+    {
+      "ticker": "SGOV",
+      "shares": 0.746714,
+      "avg_cost": 100.44,
+      "cost_basis": 75.0,
+      "opened_et": "2026-10-05 09:46:06 ET"
+    }
+  ],
+  "spy_baseline": {
+    "usd": 500.0,
+    "shares": 0.648853,
+    "price": 770.59,
+    "datetime_et": "2026-10-05 09:46:08 ET",
+    "datetime_bkk": "2026-10-05 20:46:08 ICT",
+    "source": "Yahoo Finance chart API (query1)",
+    "source_url": "https://finance.yahoo.com/quote/SPY"
+  },
+  "start_date_et": "2026-10-05 09:46:08 ET",
+  "start_date_bkk": "2026-10-05 20:46:08 ICT",
   "planned_start": "2026-10-05 09:30 ET / 2026-10-05 20:30 ICT (US open)",
   "created_bkk": "2026-10-03 10:30 ICT",
-  "last_update_bkk": "2026-10-03 10:26:20 ICT",
-  "last_prices": {}
+  "last_update_bkk": "2026-10-05 20:46:08 ICT",
+  "last_prices": {
+    "SMH": {
+      "price": 628.43,
+      "time_et": "2026-10-05 09:46:06 ET",
+      "source": "Yahoo Finance chart API (query1)"
+    },
+    "XLE": {
+      "price": 62.13,
+      "time_et": "2026-10-05 09:46:07 ET",
+      "source": "Yahoo Finance chart API (query1)"
+    },
+    "XLF": {
+      "price": 53.33,
+      "time_et": "2026-10-05 09:46:04 ET",
+      "source": "Yahoo Finance chart API (query1)"
+    },
+    "RSP": {
+      "price": 209.015,
+      "time_et": "2026-10-05 09:46:07 ET",
+      "source": "Yahoo Finance chart API (query1)"
+    },
+    "SGOV": {
+      "price": 100.44,
+      "time_et": "2026-10-05 09:46:06 ET",
+      "source": "Yahoo Finance chart API (query1)"
+    },
+    "SPY": {
+      "price": 770.59,
+      "time_et": "2026-10-05 09:46:08 ET",
+      "source": "Yahoo Finance chart API (query1)"
+    }
+  }
 }

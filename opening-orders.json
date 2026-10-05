@@ -1,11 +1,54 @@
 {
-  "_note": "Draft opening orders for Mon 5 Oct 2026 at the US open. Amounts in USD; shares and price are computed from the real price fetched at execution. Review reasons before running.",
-  "spy_baseline_usd": 500,
-  "orders": [
-    {"ticker": "SMH", "usd": 100, "reason": "AI capex is still what's leading this market: the Nasdaq closed near a record on 2 Oct even with the 10-year above 5%. Catalyst: Q3 earnings and AI spend. Risk: high yields and crowded leadership. Exit: sell 12% below entry, or trim above 30% weight.", "sources": ["https://www.wsj.com/finance/stocks/u-s-stocks-rise-as-jobs-report-tempers-rate-outlook-fde051d1", "https://www.kitco.com/news/off-the-wire/2026-10-02/wall-st-week-ahead-spiking-bond-yields-midterms-earnings-test-us"]},
-    {"ticker": "XLE", "usd": 100, "reason": "Brent near $100 supports producer cash flows and tilts us toward the energy shock. Catalyst: Gulf escalation (third US carrier) and China's fuel-export halt. Risk: de-escalation or SPR releases. Exit: Brent closes below $90 for 3 sessions, or 10% below entry.", "sources": ["https://www.moneyweb.co.za/news/markets/oil-holds-gain-as-us-sends-third-aircraft-carrier-to-middle-east/", "https://www.thenationalnews.com/business/energy/2026/10/02/oil-prices-stable-amid-mixed-supply-signals-from-the-middle-east/"]},
-    {"ticker": "XLF", "usd": 100, "reason": "Higher policy rates support bank net interest income. Catalyst: JPM/C/GS/WFC report 13 Oct and BAC 14 Oct. Risk: credit stress from 5%+ long yields and a softer labour market. Exit: review after bank earnings; sell 10% below entry.", "sources": ["https://www.jpmorganchase.com/ir/news/2026/jpmc-to-host-third-quarter-2026-earnings-call", "https://www.marketbeat.com/earnings/reports/2026-10-13-jpmorgan-chase-co-stock/"]},
-    {"ticker": "RSP", "usd": 100, "reason": "Breadth looks washed out: RSP lagged SPY by 4.6 pp in September and only 12% of sub-industries are above their 50/200-day averages. Catalyst: soft jobs data cut October hike odds to ~22%. Risk: a hike on 28 Oct or new highs in yields. Exit: 8% below entry, or Fed hike plus a new high in the 10-year.", "sources": ["https://www.cnbc.com/2026/10/02/stock-market-next-week-outlook-for-oct-5-9-2026-.html", "https://www.lse.co.uk/news/us-stocks-equities-close-higher-as-softer-jobs-data-quiets-rate-hike-expectations-asxmwpmbeyprqb8.html"]},
-    {"ticker": "SGOV", "usd": 75, "reason": "0-3 month T-bills earn roughly the policy rate (fed funds 3.75-4.00%) with minimal price risk. Dry powder for after CPI 14 Oct, FOMC 28 Oct and midterms 3 Nov. Risk: lags if equities rip. Exit: rotate into equities on a pullback or confirmed thesis.", "sources": ["https://www.federalreserve.gov/newsevents/pressreleases/monetary20260916a.htm", "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"]}
-  ]
+ "_note": "Draft opening orders for Mon 5 Oct 2026 at the US open. Amounts in USD; shares and price are computed from the real price fetched at execution. Review reasons before running.",
+ "spy_baseline_usd": 500,
+ "orders": [
+  {
+   "ticker": "SMH",
+   "usd": 100,
+   "reason": "AI capex is still what's leading this market: the Nasdaq closed near a record on 2 Oct even with the 10-year above 5%. Catalyst: Q3 earnings and AI spend. Risk: high yields and crowded leadership. Exit: sell 12% below entry, or trim above 30% weight.",
+   "sources": [
+    "https://www.wsj.com/finance/stocks/u-s-stocks-rise-as-jobs-report-tempers-rate-outlook-fde051d1",
+    "https://www.kitco.com/news/off-the-wire/2026-10-02/wall-st-week-ahead-spiking-bond-yields-midterms-earnings-test-us"
+   ]
+  },
+  {
+   "ticker": "XLE",
+   "usd": 100,
+   "reason": "Brent near $100 supports producer cash flows and tilts us toward the energy shock. Catalyst: Gulf escalation (third US carrier) and China's fuel-export halt. Risk: de-escalation or SPR releases. Exit: Brent closes below $90 for 3 sessions, or 10% below entry. Mon 5 Oct update: Brent back above $103 after a reported attack halted Saudi Arabia's East-West pipeline and Iran says Hormuz stays shut until its conditions are met; the G7's 100m-barrel reserve release is the main near-term risk.",
+   "sources": [
+    "https://www.moneyweb.co.za/news/markets/oil-holds-gain-as-us-sends-third-aircraft-carrier-to-middle-east/",
+    "https://www.thenationalnews.com/business/energy/2026/10/02/oil-prices-stable-amid-mixed-supply-signals-from-the-middle-east/",
+    "https://www.newsquawk.com/headlines/market-analysis-crude-reverses-earlier-downside-after-saudi-attack-halts-pipeline-aramco-warns-release-relief-will-prove-temporary",
+    "https://www.canberratimes.com.au/story/9362359/iran-says-hormuz-wont-reopen-until-conditions-are-met/"
+   ]
+  },
+  {
+   "ticker": "XLF",
+   "usd": 100,
+   "reason": "Higher policy rates support bank net interest income. Catalyst: JPM/C/GS/WFC report 13 Oct and BAC 14 Oct. Risk: credit stress from 5%+ long yields and a softer labour market. Exit: review after bank earnings; sell 10% below entry.",
+   "sources": [
+    "https://www.jpmorganchase.com/ir/news/2026/jpmc-to-host-third-quarter-2026-earnings-call",
+    "https://www.marketbeat.com/earnings/reports/2026-10-13-jpmorgan-chase-co-stock/"
+   ]
+  },
+  {
+   "ticker": "RSP",
+   "usd": 100,
+   "reason": "Breadth looks washed out: RSP lagged SPY by 4.6 pp in September and only 12% of sub-industries are above their 50/200-day averages. Catalyst: soft jobs data cut October hike odds to ~22%. Risk: a hike on 28 Oct or new highs in yields. Exit: 8% below entry, or Fed hike plus a new high in the 10-year. Mon 5 Oct update: October hold odds are now above 80% after the weak payrolls, but the 10-year near 5.26% and today's ISM services print (10:00 ET) are the risk.",
+   "sources": [
+    "https://www.cnbc.com/2026/10/02/stock-market-next-week-outlook-for-oct-5-9-2026-.html",
+    "https://www.lse.co.uk/news/us-stocks-equities-close-higher-as-softer-jobs-data-quiets-rate-hike-expectations-asxmwpmbeyprqb8.html",
+    "https://invezz.com/news/2026/10/05/wall-street-futures-plunge-ahead-of-key-data-5-things-to-know-before-market-opens/"
+   ]
+  },
+  {
+   "ticker": "SGOV",
+   "usd": 75,
+   "reason": "0-3 month T-bills earn roughly the policy rate (fed funds 3.75-4.00%) with minimal price risk. Dry powder for after CPI 14 Oct, FOMC 28 Oct and midterms 3 Nov. Risk: lags if equities rip. Exit: rotate into equities on a pullback or confirmed thesis.",
+   "sources": [
+    "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260916a.htm",
+    "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+   ]
+  }
+ ]
 }
