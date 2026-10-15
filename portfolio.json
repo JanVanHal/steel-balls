@@ -54,36 +54,36 @@
   "start_date_bkk": "2026-10-05 20:46:08 ICT",
   "planned_start": "2026-10-05 09:30 ET / 2026-10-05 20:30 ICT (US open)",
   "created_bkk": "2026-10-03 10:30 ICT",
-  "last_update_bkk": "2026-10-15 04:24:04 ICT",
+  "last_update_bkk": "2026-10-16 04:26:03 ICT",
   "last_prices": {
     "SMH": {
-      "price": 564.74,
-      "time_et": "2026-10-14 16:00:00 ET",
+      "price": 558.84,
+      "time_et": "2026-10-15 16:00:00 ET",
       "source": "Yahoo Finance chart API (query1)"
     },
     "XLE": {
-      "price": 67.63,
-      "time_et": "2026-10-14 16:00:00 ET",
+      "price": 66.56,
+      "time_et": "2026-10-15 16:00:00 ET",
       "source": "Yahoo Finance chart API (query1)"
     },
     "XLF": {
-      "price": 54.52,
-      "time_et": "2026-10-14 16:00:00 ET",
+      "price": 55.27,
+      "time_et": "2026-10-15 16:00:00 ET",
       "source": "Yahoo Finance chart API (query1)"
     },
     "RSP": {
-      "price": 212.09,
-      "time_et": "2026-10-14 16:00:00 ET",
+      "price": 215.0,
+      "time_et": "2026-10-15 16:00:00 ET",
       "source": "Yahoo Finance chart API (query1)"
     },
     "SGOV": {
-      "price": 100.54,
-      "time_et": "2026-10-14 16:00:55 ET",
+      "price": 100.55,
+      "time_et": "2026-10-15 16:00:16 ET",
       "source": "Yahoo Finance chart API (query1)"
     },
     "SPY": {
-      "price": 769.6,
-      "time_et": "2026-10-14 16:00:00 ET",
+      "price": 771.79,
+      "time_et": "2026-10-15 16:00:00 ET",
       "source": "Yahoo Finance chart API (query1)"
     }
   }
