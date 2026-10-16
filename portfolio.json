@@ -3,15 +3,8 @@
   "mode": "paper-trading simulation (no real money)",
   "currency": "USD",
   "start_cash": 500.0,
-  "cash": 25.0,
+  "cash": 110.89,
   "positions": [
-    {
-      "ticker": "SMH",
-      "shares": 0.159126,
-      "avg_cost": 628.43,
-      "cost_basis": 100.0,
-      "opened_et": "2026-10-05 09:46:06 ET"
-    },
     {
       "ticker": "XLE",
       "shares": 1.609528,
@@ -54,7 +47,7 @@
   "start_date_bkk": "2026-10-05 20:46:08 ICT",
   "planned_start": "2026-10-05 09:30 ET / 2026-10-05 20:30 ICT (US open)",
   "created_bkk": "2026-10-03 10:30 ICT",
-  "last_update_bkk": "2026-10-17 04:27:47 ICT",
+  "last_update_bkk": "2026-10-17 04:28:13 ICT",
   "last_prices": {
     "SMH": {
       "price": 539.79,
